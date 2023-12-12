@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { 
+  GoogleAuthProvider, 
+  getAuth, 
+  onAuthStateChanged, 
+  signInWithPopup, 
+  signOut
+} from "firebase/auth";
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -24,6 +30,11 @@ const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
+// 구글 자동 로그인 방지
+provider.setCustomParameters({
+  prompt : 'select_account'
+})
+
 // 구글 로그인 function
 export async function googleLogin(){
   try{
@@ -33,6 +44,14 @@ export async function googleLogin(){
       return user;
   }catch(error){
     console.log(error)
+  }
+}
+
+export async function googleLogOut(){
+  try{
+    await signOut(auth);  // 기존의 정보들을 초기화하는 hook
+  }catch(error){
+    console.log(error);
   }
 }
 

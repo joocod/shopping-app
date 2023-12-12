@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
-import { googleLogin } from '../api/firebase';
+import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
 
 function Nav() {
 
@@ -10,14 +10,24 @@ function Nav() {
     const login =()=>{
         googleLogin().then(setUser);
     }
-    console.log(user);
+   
+    const logout=()=>{
+        googleLogOut().then(setUser);
+    }
 
+    useEffect(()=>{
+        onUserState((user)=>{
+            setUser(user);
+         })
+    }, [])
+    console.log(user);
+    
     return (
         <HeaderContainer>
             <h1><Link to='/'>shop</Link></h1>
             <div className='userWrap'>
                 {!user && <button className='loginBtn' onClick={login}>login</button>}
-                {user && <button className='logoutBtn'>logout</button>}
+                {user && <button className='logoutBtn' onClick={logout}>logout</button>}
             </div>
         </HeaderContainer>
     )
