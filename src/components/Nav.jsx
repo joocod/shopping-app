@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
 import UserData from './UserData';
+import { LuPencil } from "react-icons/lu";
 
 function Nav() {
 
@@ -29,7 +30,7 @@ function Nav() {
 
             <div className='userWrap'>
                 {user && user.isAdmin && (
-                   <Link to='/product/upload'>업로드</Link>
+                   <Link to='/product/upload' className='uploadBtn'>{LuPencil}</Link>
                 )}
                 {user ?(
                     <>
@@ -66,6 +67,9 @@ const HeaderContainer = styled.header`
             &.logoutBtn{
                 background: gray;
             }
+        }
+        .uploadBtn{
+
         }
     }
 `
