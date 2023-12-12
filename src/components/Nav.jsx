@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
 import UserData from './UserData';
-import { LuPencil } from "react-icons/lu";
+import { FaPen } from "react-icons/fa";
 
 function Nav() {
 
@@ -30,7 +30,7 @@ function Nav() {
 
             <div className='userWrap'>
                 {user && user.isAdmin && (
-                   <Link to='/product/upload' className='uploadBtn'>{LuPencil}</Link>
+                   <Link to='/product/upload' className='uploadBtn'>업로드</Link>
                 )}
                 {user ?(
                     <>
@@ -52,7 +52,7 @@ const HeaderContainer = styled.header`
     align-items: center;
     padding: 12px;
     gap: 24px;
-
+    border-bottom: solid 1px rgba(0,0,0,0.1);
     .userWrap{
         display: flex;
         margin-left: auto;
