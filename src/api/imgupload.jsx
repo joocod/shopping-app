@@ -1,5 +1,5 @@
 
-export async function uploadImg(file){
+export async function upLoadImg(file){
     try{
         const formData = new FormData();
         formData.append('file', file);
