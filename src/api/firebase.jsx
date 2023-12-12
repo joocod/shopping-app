@@ -7,6 +7,8 @@ import {
   signOut
 } from "firebase/auth";
 
+import {get,getDatabase,ref} from 'firebase/database';
+
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain : process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -29,6 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
+const database = getDatabase(app);
 
 // 구글 자동 로그인 방지
 provider.setCustomParameters({
@@ -60,7 +63,8 @@ export function onUserState(callback){
   onAuthStateChanged(auth, async(user)=>{
     if(user){
       try{
-        callback(user);
+        const updateUser = await adminUser(user);
+        callback(updateUser);
       }catch(error){
         console.error(error)
       }
@@ -85,5 +89,8 @@ async function adminUser(user){
 
       return {...user, isAdmin} 
     }
+    return user
+  }catch(error){
+    console.error(error);
   }
 }
