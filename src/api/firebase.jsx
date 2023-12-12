@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -34,4 +34,20 @@ export async function googleLogin(){
   }catch(error){
     console.log(error)
   }
+}
+
+// 로그인 시 새로고침을 해도 로그인 상태 유지
+export function onUserState(callback){
+  onAuthStateChanged(auth, async(user)=>{
+    if(user){
+      try{
+        callback(user);
+      }catch(error){
+        console.error(error)
+      }
+    }else{
+      callback(null);
+    }
+  })
+  // onAuthStateChanged : 사용자 인증 상태의 변화를 체크하는 hook(로그인 / 로그아웃)
 }

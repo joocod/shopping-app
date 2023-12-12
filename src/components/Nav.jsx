@@ -10,12 +10,14 @@ function Nav() {
     const login =()=>{
         googleLogin().then(setUser);
     }
+    console.log(user);
 
     return (
         <HeaderContainer>
             <h1><Link to='/'>shop</Link></h1>
             <div className='userWrap'>
-                <button className='loginBtn' onClick={login}>login</button>
+                {!user && <button className='loginBtn' onClick={login}>login</button>}
+                {user && <button className='logoutBtn'>logout</button>}
             </div>
         </HeaderContainer>
     )
