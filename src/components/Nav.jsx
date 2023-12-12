@@ -28,7 +28,9 @@ function Nav() {
             <h1><Link to='/'>shop</Link></h1>
 
             <div className='userWrap'>
-                <Link to='/product/upload'>업로드</Link>
+                {user && user.isAdmin && (
+                   <Link to='/product/upload'>업로드</Link>
+                )}
 
                 {user && <UserData user={user}/>}
                 {!user && <button className='loginBtn' onClick={login}>login</button>}
