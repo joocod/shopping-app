@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -20,3 +21,17 @@ const firebaseConfig = {
 */
 
 const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider();
+const auth = getAuth();
+
+// 구글 로그인 function
+export async function googleLogin(){
+  try{
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log(user)
+      return user;
+  }catch(error){
+    console.log(error)
+  }
+}
