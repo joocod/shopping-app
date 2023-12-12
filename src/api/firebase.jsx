@@ -70,3 +70,20 @@ export function onUserState(callback){
   })
   // onAuthStateChanged : 사용자 인증 상태의 변화를 체크하는 hook(로그인 / 로그아웃)
 }
+
+async function adminUser(user){
+  try{
+    const snapshot = await get(ref(database, 'admin'));
+    // snapshot : firebase의 database 안에 있는 admin 폴더를 검색
+    if(snapshot.exists()){
+      // snapshot.exists() : snapshot 안에 데이터가 있음을 의미
+      
+      const admins = snapshot.val();  // admin 폴더 안에 있는 데이터들을 검색
+      
+      const isAdmin = admins.includes(user.email);
+      // 검색된 admins에 현재 로그인된 사용자의 이메일과 일치하는 이메일이 있는지 확인
+
+      return {...user, isAdmin} 
+    }
+  }
+}

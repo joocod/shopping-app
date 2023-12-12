@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
+import UserData from './UserData';
 
 function Nav() {
 
@@ -25,7 +26,9 @@ function Nav() {
     return (
         <HeaderContainer>
             <h1><Link to='/'>shop</Link></h1>
+            
             <div className='userWrap'>
+                {user && <UserData user={user}/>}
                 {!user && <button className='loginBtn' onClick={login}>login</button>}
                 {user && <button className='logoutBtn' onClick={logout}>logout</button>}
             </div>
