@@ -3,18 +3,23 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
 import UploadProduct from './pages/UploadProduct';
+import { useAuthContext } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // 관리자 인증(조건을 하나라도 만족하지 않을 경우 페이지를 이동할 수 없게 하고 강제로 홈으로 이동)
-// const protectRouter = ({checkAdmin, children})=>{
-//   const {user} = useAu
-// }
+const ProtectRouter = ({checkAdmin, children})=>{
+  const {user} = useAuthContext();
+  if(!user || (checkAdmin && !user.isAdmin)){
+    return <Navigate to='/' replace/>
+  }
+  return children;
+}
 
 const routes = createBrowserRouter([
   {
@@ -25,7 +30,13 @@ const routes = createBrowserRouter([
     children : [
       {path : '/cart', element : <MyCart/>},
       {path : '/products/detail/:id', element : <ProductDetail/>},
-      {path : '/product/upload', element : <UploadProduct/>}
+      {
+        path : '/product/upload', 
+        element : 
+        <ProtectRouter checkAdmin>
+          <UploadProduct/>
+        </ProtectRouter>
+      }
     ]
   }
 ])

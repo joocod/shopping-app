@@ -1,6 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import { onUserState } from "../api/firebase";
-
+import { createContext, useContext, useEffect, useState } from "react";
+import { onUserState, googleLogin, googleLogOut } from "../api/firebase";
 
 const AuthContext = createContext();
 
@@ -10,7 +9,7 @@ const AuthContext = createContext();
     - createContext() : 컨텍스트를 사용하기 위해 생성
 */
 export function AuthContextProvider({children}){
-    const [user, setUser] = userState();
+    const [user, setUser] = useState();
     const [unSubScribe, setunSubScribe] = useState();
 
     useEffect(()=>{
@@ -26,4 +25,15 @@ export function AuthContextProvider({children}){
             }
         }
     }, [])
+
+    return(
+        <AuthContext.Provider value={{user, googleLogin, googleLogOut, uid:user}}>
+            {children}
+        </AuthContext.Provider>
+    )
 }
+
+export function useAuthContext(){
+    return useContext(AuthContext)
+}
+// 위의 함수들을 단순화시켜서 다른 곳에서 참조할 수 있도록 context를 export함
