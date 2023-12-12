@@ -7,6 +7,7 @@ import {RouterProvider, createBrowserRouter } from 'react-router-dom';
 import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
+import UploadProduct from './pages/UploadProduct';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,7 +19,8 @@ const routes = createBrowserRouter([
 
     children : [
       {path : '/cart', element : <MyCart/>},
-      {path : '/products/detail/:id', element : <ProductDetail/>}
+      {path : '/products/detail/:id', element : <ProductDetail/>},
+      {path : '/product/upload', element : <UploadProduct/>}
     ]
   }
 ])
