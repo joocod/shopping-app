@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 
 import {get,getDatabase,ref} from 'firebase/database';
+import {v4 as uuid} from 'uuid';
 
 const firebaseConfig = {
     apiKey : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -93,4 +94,13 @@ async function adminUser(user){
   }catch(error){
     console.error(error);
   }
+}
+
+export async function addProducts(product, image){
+    /*
+      * uuid 
+      - 식별자를 만들어주는 라이브러리
+      - 숫자와 영문으로 조합된 식별자 코드를 부여해서 고유값으로 사용
+    */
+   const id = uuid()
 }
