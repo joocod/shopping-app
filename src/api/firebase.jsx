@@ -7,7 +7,7 @@ import {
   signOut
 } from "firebase/auth";
 
-import {get,getDatabase,ref} from 'firebase/database';
+import {set,get,getDatabase,ref} from 'firebase/database';
 import {v4 as uuid} from 'uuid';
 
 const firebaseConfig = {
@@ -96,6 +96,7 @@ async function adminUser(user){
   }
 }
 
+// 상품을 database에 업로드
 export async function addProducts(product, image){
     /*
       * uuid 
@@ -103,4 +104,25 @@ export async function addProducts(product, image){
       - 숫자와 영문으로 조합된 식별자 코드를 부여해서 고유값으로 사용
     */
    const id = uuid()
+   return set(ref(database, `products/${id}`),{
+     ...product,
+     id,
+     image,
+   })
+}
+
+// database에 있는 상품 가져오기
+export async function getProducts(){
+  /*
+    * async
+    - 비동기 방식의 데이터 처리 방법
+    - promise의 단점을 보완한 최신 비동기 처리 방식 코드
+  */
+
+ const snapshot = await get(ref(database, 'products'));
+ if(snapshot.exists()){
+    return Object.values(snapshot.val())
+  }else{
+    return []
+  }
 }

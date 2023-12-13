@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {upLoadImg} from '../api/imgupload';
+import { addProducts } from '../api/firebase';
+import {styled} from 'styled-components';
 
 function UploadProduct() {
 
@@ -7,6 +9,8 @@ function UploadProduct() {
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
+
+    const fileRef = useRef();
 
     const [product, setProduct] = useState({
         title : '',
@@ -21,21 +25,43 @@ function UploadProduct() {
         if(name === 'file' && files && files[0]){
             setFile(files[0])
         }else{
-            setProduct((prev)=>({prev, [name]:value}))
+            setProduct((prev)=>({...prev, [name]:value}))
         }
     }
 
     const uploadSubmit = async(e)=>{
         e.preventDefault();
         try{
-            const url = await upLoadImg(file)
+            const url = await upLoadImg(file);
+            await addProducts(product, url);
+            setSuccess('업로드가 완료되었습니다.');
+            setTimeout(()=>{
+                setSuccess(null)
+            },2000);
+
+            setFile(null)
+
+            setProduct({
+                title : '',
+                price : '',
+                option : '',
+                category : '',
+                description : '',  
+            })
+            if(fileRef.current){
+                fileRef.current.value = '';
+            }
         }catch(error){
             console.error(error)
+            setError('업로드에 실패했습니다.');
+        }finally{
+            setIsLoading(false)
         }
     }
 
     return (
         <div className='container'>
+            <FormContainer>
             <div className='imgUploadWrap'>
                 {file && (
                     <img src={URL.createObjectURL(file)}/>
@@ -47,7 +73,8 @@ function UploadProduct() {
                     type='file'
                     name='file'
                     accept='image/*'
-                    onChange={(e) => setFile(e.target.files[0])}
+                    onChange={productInfoChange}
+                    ref={fileRef}
                 />
 
                 {/** 상품 제목 */}
@@ -97,9 +124,57 @@ function UploadProduct() {
                 <button disabled={isLoading}>
                     {isLoading ? '업로드 중' : '제품 등록'}
                 </button>
+                {success && (
+                    <p>{success}</p>
+                )}
+                {error && (
+                    <p>{error}</p>
+                )}
             </form>
+            </FormContainer>
         </div>
     )
 }
 
 export default UploadProduct
+
+const FormContainer = styled.div`
+    max-width: 1200px;
+    padding: 30px 0px;
+    margin: 0px auto;
+    display: flex;
+    gap: 40px;
+    .imgUploadWrap{
+        max-width: 500px;
+        height: auto;
+        img{
+            display: block;
+            height: 100%;
+        }
+    }
+    form{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        input{
+            width: 100%;
+            box-sizing: border-box;
+            height: 40px;
+            border-radius: 4px;
+            border-color: rgba(0,0,0,0.2);
+            padding: 6px 12px;
+        }
+        button{
+            margin-top: auto;
+            height: 50px;
+            border-radius: 4px;
+            background: rgba(255,183,245,0.5);
+            border: none;
+            transition: 500ms;
+            &:hover{
+                background: rgba(255,183,245,1);
+            }
+        }
+    }
+`
