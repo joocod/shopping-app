@@ -18,7 +18,7 @@ function AllProduct() {
     },[])
     
     return (
-        <div>
+        <div className='container'>
             <Products products={product}/>
         </div>
     )
