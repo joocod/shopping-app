@@ -15,14 +15,15 @@ function AllProduct() {
         }
         fetchProducts();
     },[])
+    
     return (
         <div>
-            {product && product.map(el=>(
+            {/* {product && product.map(el=>(
                 <div key={el.id}>
-                    {/* <img src={el.image}/> */}
+                    <img src={el.image}/>
                     <p>{el.title}</p>
                 </div>
-            ))}
+            ))} */}
         </div>
     )
 }
