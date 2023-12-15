@@ -22,7 +22,7 @@ function Nav() {
             setUser(user);
          })
     }, [])
-    // console.log(user);
+    console.log(user);
     
     return (
         <HeaderContainer>
@@ -69,7 +69,7 @@ const HeaderContainer = styled.header`
             }
         }
         .uploadBtn{
-
+            
         }
     }
 `

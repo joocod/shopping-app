@@ -6,13 +6,16 @@ import UseCart from '../context/UseCart';
 function ProductDetail() {
     const {addItemCart} = UseCart();
     const state = useLocation().state;
+    console.log(state)
     const {id,image,price,option,
         colors,title,description,category} = state;
+    // console.log(option)
 
     const setOpt = option.split(',').map((option)=>option.trim())
     const [selected, setSelected] = useState(setOpt && setOpt[0])
     const [success, setSuccess] = useState();   // 장바구니 아이템 전송 여부 값    
-   
+    // console.log(selected)
+
     const selectOpt = (e)=>{
         setSelected(e.target.value)
     }    
