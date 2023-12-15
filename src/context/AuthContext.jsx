@@ -27,7 +27,7 @@ export function AuthContextProvider({children}){
     }, [])
 
     return(
-        <AuthContext.Provider value={{user, googleLogin, googleLogOut, uid:user}}>
+        <AuthContext.Provider value={{user, googleLogin, googleLogOut, uid:user && user.uid}}>
             {children}
         </AuthContext.Provider>
     )

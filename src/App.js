@@ -23,7 +23,7 @@ function App() {
           {/* <AllProduct/> */}
           <Outlet/> 
         </AuthContextProvider>
-        </QueryClientProvider>
+      </QueryClientProvider>
     </>
   );
 }
