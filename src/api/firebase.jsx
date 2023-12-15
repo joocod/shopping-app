@@ -126,3 +126,30 @@ export async function getProducts(){
     return []
   }
 }
+
+// 장바구니 리스트 (업데이트, 상품 정보 가져오기, 상품 삭제)
+
+// 장바구니 리스트 불러오기
+export async function getCart(userId){
+  try{
+    const snapshot = await(get(ref(database, `cart/${userId}`)));
+    if(snapshot.exists()){
+      const item = snapshot.val();
+      return Object.values(item);
+    }else{
+      return []
+    }
+  }catch(error){
+    console.error(error)
+  }
+}
+
+// 장바구니 업데이트
+export async function updateCart(userId, product){
+  try{
+    const cartRef = ref(database, `cart/${userId}/${product.id}`);
+    await set(cartRef, product);
+  }catch(error){
+    console.log(error)
+  }
+}
