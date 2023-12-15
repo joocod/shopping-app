@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import UseCart from '../context/UseCart';
 
 function ProductDetail() {
+    const {addItemCart} = UseCart();
     const state = useLocation().state;
     const {id,image,price,option,
         colors,title,description,category} = state;
@@ -14,6 +16,17 @@ function ProductDetail() {
     const selectOpt = (e)=>{
         setSelected(e.target.value)
     }    
+
+    const cartItem = ()=>{
+        const product = {id, image, title, price, 
+              option:selected, quantity : 1}
+              // quantity : 1 -> 수량
+        addItemCart.mutate(product,{
+            onSuccess : ()=>{
+                setSuccess('장바구니에 아이템이 추가되었습니다.');
+            }
+        })     
+    }
 
     return (
         <div className='container'>
@@ -37,9 +50,10 @@ function ProductDetail() {
                     </div>
                 </div>
                 <div className='detailBtns'>
-                    <button className='cartBtn'>장바구니 담기</button>
-                    <button className='biyBtn'>구매하기</button>               
+                    <button className='cartBtn' onClick={cartItem}>장바구니 담기</button>
+                    <button className='buyBtn'>구매하기</button>               
                 </div>
+                {success && <p>{success}</p>}
             </DetailPage>
         </div>
     )

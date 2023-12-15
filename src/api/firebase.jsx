@@ -135,7 +135,7 @@ export async function getCart(userId){
     const snapshot = await(get(ref(database, `cart/${userId}`)));
     if(snapshot.exists()){
       const item = snapshot.val();
-      return Object.values(item);
+      return Object.values(item)
     }else{
       return []
     }
