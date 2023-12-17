@@ -66,5 +66,10 @@ button{
 	margin: 0px auto;
 	padding: 100px 0px;
 }
+.itemTitle{
+	font-size: 24px;
+	margin-bottom: 36px;
+	font-weight: normal;
+}
 `
 export default GlobalStyle;
