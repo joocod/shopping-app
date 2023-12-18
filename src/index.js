@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { useAuthContext } from './context/AuthContext';
+
 import NotFound from './pages/NotFound';
 import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
 import UploadProduct from './pages/UploadProduct';
-import { useAuthContext } from './context/AuthContext';
+import CategoryPages from './pages/CategoryPages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -30,6 +32,7 @@ const routes = createBrowserRouter([
     children : [
       {path : '/cart', element : <MyCart/>},
       {path : '/products/detail/:id', element : <ProductDetail/>},
+      {path : '/products/:category', element : <CategoryPages/>},
       {
         path : '/product/upload', 
         element : 

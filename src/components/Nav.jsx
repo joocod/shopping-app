@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
 import UserData from './UserData';
 import { FaPen } from "react-icons/fa";
+import MainMenu from './MainMenu';
 
 function Nav() {
 
@@ -27,6 +28,7 @@ function Nav() {
     return (
         <HeaderContainer>
             <h1><Link to='/'>shop</Link></h1>
+            <MainMenu/>
 
             <div className='userWrap'>
                 {user && user.isAdmin && (
