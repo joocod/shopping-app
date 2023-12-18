@@ -176,3 +176,30 @@ export async function getCategoryProduct(category){
     return [];
   })
 }
+
+// 상품 검색
+export async function searchProducts(query){
+   try{
+    const dbRef = ref(database, 'products');
+    const snapshot = await get(dbRef);
+    if(snapshot.exists()){
+      const data = snapshot.val();
+      const allProducts = Object.values(data);
+
+      if(allProducts.length === 0){
+        return []
+      }
+      const matchProducts = allProducts.filter((product)=>{
+        const itemTitle = product.itemTitle
+        return itemTitle.includes(query)
+      })
+
+      return matchProducts
+    }else{
+      return []
+    }
+
+   }catch(error){
+
+   }
+}

@@ -31,6 +31,7 @@ function Nav() {
             <MainMenu/>
 
             <div className='userWrap'>
+                <Link to='/search'>검색</Link>
                 {user && user.isAdmin && (
                    <Link to='/product/upload' className='uploadBtn'>업로드</Link>
                 )}

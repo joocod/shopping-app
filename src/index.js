@@ -11,6 +11,7 @@ import MyCart from './pages/MyCart';
 import ProductDetail from './pages/ProductDetail';
 import UploadProduct from './pages/UploadProduct';
 import CategoryPages from './pages/CategoryPages';
+import Search from './pages/Search';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -33,6 +34,7 @@ const routes = createBrowserRouter([
       {path : '/cart', element : <MyCart/>},
       {path : '/products/detail/:id', element : <ProductDetail/>},
       {path : '/products/:category', element : <CategoryPages/>},
+      {path : '/search', element : <Search/>},
       {
         path : '/product/upload', 
         element : 

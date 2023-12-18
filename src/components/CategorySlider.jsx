@@ -1,5 +1,5 @@
 import React from 'react'
-import Swiper from 'swiper'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import 'swiper/css'
 import {Autoplay, EffectFade} from 'swiper/modules'
 import 'swiper/css/effect-fade';
@@ -17,11 +17,16 @@ function CategorySlider({imgs}) {
                 style={slider}
                 slidesPerView={1}
                 loop={true}
-                autoplay={{delay : 2000}}
-                speed = {3000}
-                modules = {{Autoplay, EffectFade}}
-                effect = {'fade'}
+                autoplay={{delay:2000}}
+                speed={3000}
+                modules={[Autoplay,EffectFade]}
+                effect={'fade'}
             > 
+            {imgs.map((img,index)=>(
+                <SwiperSlide key={index}>
+                    <img src={img}/>
+                </SwiperSlide>
+            ))}
            </Swiper>
        </>
     )
