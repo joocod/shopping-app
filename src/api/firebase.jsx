@@ -158,3 +158,21 @@ export async function updateCart(userId, product){
 export async function deleteCart(userId, productId){
   return remove(ref(database, `cart/${userId}/${productId}`))
 }
+
+// 카테고리 상품 가져오기
+export async function getCategoryProduct(category){
+  // console.log(category)
+  return get(ref(database, 'products')).then((snapshot)=>{
+    if(snapshot.exists()){
+      /*
+         - 카테고리 별로 아이템 나누는 방식은 전체 상품을 먼저 구한 뒤에 
+           필터로 카테고리 별로 구분
+      */
+      const allProducts = Object.values(snapshot.val());
+      const filterProducts = allProducts.filter((product)=>product.category === category);
+      
+      return filterProducts
+    }
+    return [];
+  })
+}

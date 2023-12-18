@@ -16,8 +16,8 @@ function UploadProduct() {
     const {categoryList} = useContext(CategoryContext);
     console.log(categoryList)
     const colors = [
-        '#f6d365','#a1c4fd','#a6c0fe','#dddddd','#d4fc79',
-        '#84fab0','#fa709a','#30cfd0','#667eea','#96fbc4'
+        '#f6d365','#a1c4fd','#8B4513','#ffffff','#d4fc79',
+        '#84fab0','#fa709a','#30cfd0','#000080','#000000'
     ]
 
     const [product, setProduct] = useState({
