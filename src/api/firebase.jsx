@@ -7,7 +7,7 @@ import {
   signOut
 } from "firebase/auth";
 
-import {set,get,getDatabase,ref} from 'firebase/database';
+import {set, get, getDatabase, ref, remove} from 'firebase/database';
 import {v4 as uuid} from 'uuid';
 
 const firebaseConfig = {
@@ -152,4 +152,9 @@ export async function updateCart(userId, product){
   }catch(error){
     console.log(error)
   }
+}
+
+// 장바구니 목록 삭제
+export async function deleteCart(userId, productId){
+  return remove(ref(database, `cart/${userId}/${productId}`))
 }

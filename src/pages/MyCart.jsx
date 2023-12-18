@@ -40,5 +40,9 @@ const CartList = styled.ul`
             width: 100px;
             display: block;
         }
+        .quantityWrap{
+            display: flex;
+            gap: 10px;
+        }
     }
 `

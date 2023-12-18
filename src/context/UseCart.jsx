@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthContext } from "./AuthContext";
-import { getCart, updateCart } from "../api/firebase";
+import { deleteCart, getCart, updateCart } from "../api/firebase";
 
 export default function UseCart(){
    const {uid} = useAuthContext();
@@ -19,5 +19,13 @@ export default function UseCart(){
         queryClient.invalidateQueries(['cart',uid])
     }
   })
-  return {cartInfo, addItemCart}
+
+  const removeCart = useMutation({
+    mutationFn : (id) => deleteCart(uid, id),
+    onSuccess : ()=>{
+      queryClient.invalidateQueries(['cart',uid])
+    }
+  })
+
+  return {cartInfo, addItemCart, removeCart}
 }   
