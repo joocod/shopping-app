@@ -1,6 +1,6 @@
 import React from 'react'
 
-function componentName() {
+function CategorySlider() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function componentName() {
     )
 }
 
-export default componentName
+export default CategorySlider
