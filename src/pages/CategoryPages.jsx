@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CategoryProductList from '../components/CategoryProductList';
 import { getCategoryProduct } from '../api/firebase';
+import CategorySlider from '../components/CategorySlider';
 
 function CategoryPages() {
     const {category} = useParams();
@@ -20,6 +21,7 @@ function CategoryPages() {
     return (
         <div>
             {category}
+            <CategorySlider imgs={products.image}/>
             <CategoryProductList category={category} product={products}/>
         </div>
     )
