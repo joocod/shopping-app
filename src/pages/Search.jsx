@@ -4,26 +4,29 @@ import { searchProducts } from '../api/firebase';
 function Search() { 
     const [query, setQuery] = useState('');
     const [result, setResult] = useState([]);
+
     useEffect(()=>{
-        if(query.trim() === ''){
-            setResult([])
-        }else{
-          try{
-             const txt = await searchProducts(query);
-             setResult(txt);
-          }catch(error){
-            console.error(error)
-          }
+        const fetchProducts = async()=>{
+            if(query.trim() === ''){
+                setResult([])
+            }else{
+               try{
+                   const txt = await searchProducts(query);
+                   setResult(txt)
+               }catch(error){
+                 console.error(error)
+               }
+            }
         }
-    })
+        fetchProducts()
+    }, [query])
 
     const onSearchEvent=(e)=>{
         e.preventDefault();
-        setQuery(e.target.value)
-        console.log(query)
+        setQuery(e.target.value);
     }
 
-    return (
+    return(
         <div className='container'>
             <input type='text' value={query} onChange={onSearchEvent} className='searchForm'/>
         </div>

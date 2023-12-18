@@ -17,16 +17,17 @@ function CategoryPages() {
             console.error(error)
         })
     }, [category])
+    console.log(products)
     // const slideItem = products.map((product)=>product.image)
     // console.log(slideItem)
 
     useEffect(()=>{
         if(products.length > 0){
             const randomImg = [...products].sort(()=>0.5-Math.random())
-            console.log(randomImg)
+            // console.log(randomImg)
             const selectImg = randomImg.slice(0,4).map((el)=>el.image)
             setRandomImages(selectImg)
-            console.log(randomImages)
+            // console.log(randomImages)
         }
     },[products])
     /*

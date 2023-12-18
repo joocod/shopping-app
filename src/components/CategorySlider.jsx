@@ -10,7 +10,7 @@ const slider = {
 }
 
 function CategorySlider({imgs}) {
-    console.log(imgs)
+    // console.log(imgs)
     return (
        <>
            <Swiper 

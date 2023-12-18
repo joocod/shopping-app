@@ -190,7 +190,7 @@ export async function searchProducts(query){
         return []
       }
       const matchProducts = allProducts.filter((product)=>{
-        const itemTitle = product.itemTitle
+        const itemTitle = product.title
         return itemTitle.includes(query)
       })
 
