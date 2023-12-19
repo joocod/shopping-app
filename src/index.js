@@ -12,6 +12,8 @@ import ProductDetail from './pages/ProductDetail';
 import UploadProduct from './pages/UploadProduct';
 import CategoryPages from './pages/CategoryPages';
 import Search from './pages/Search';
+import WritePage from './pages/WritePage';
+import Qna from './pages/Qna';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -35,6 +37,8 @@ const routes = createBrowserRouter([
       {path : '/products/detail/:id', element : <ProductDetail/>},
       {path : '/products/:category', element : <CategoryPages/>},
       {path : '/search', element : <Search/>},
+      {path : '/board/write', element : <WritePage/>},
+      {path : '/board/qna', element : <Qna/>},
       {
         path : '/product/upload', 
         element : 

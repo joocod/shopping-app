@@ -29,6 +29,7 @@ function Nav() {
         <HeaderContainer>
             <h1><Link to='/'>shop</Link></h1>
             <MainMenu/>
+            <Link to='/board/qna'>QnA</Link>
 
             <div className='userWrap'>
                 <Link to='/search'>검색</Link>

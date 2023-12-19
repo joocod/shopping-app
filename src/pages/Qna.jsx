@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { onUserState } from '../api/firebase';
 
 function Qna() {
 
+    const [user, setUser] = useState();
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        onUserState((user)=>{
+            setUser(user);
+        })
+    })
     const onWriteEvent = ()=>{
         navigate(`/board/write`,{state : {email : user.email}})
     }
