@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { searchProducts } from '../api/firebase';
+import DetailPageEvent from '../components/DetailPageEvent';
 
 function Search() { 
     const [query, setQuery] = useState('');
@@ -29,6 +30,14 @@ function Search() {
     return(
         <div className='container'>
             <input type='text' value={query} onChange={onSearchEvent} className='searchForm'/>
+        
+            <div className='productList'>
+                {result.map((product)=>(
+                    <li>
+                        <DetailPageEvent key={product.id} product={product}/>
+                    </li>
+                ))}
+            </div>
         </div>
     )
 }
