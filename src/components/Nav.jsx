@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
 import UserData from './UserData';
-import { FaPen } from "react-icons/fa";
+// import { FaPen } from "react-icons/fa";
 import MainMenu from './MainMenu';
 
 function Nav() {

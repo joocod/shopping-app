@@ -216,3 +216,14 @@ export async function addBoard(user, date, title, text){
    }
    return set(ref(database, `/board/${id}`), postData)
 }
+
+// 등록된 게시글 가져오기
+export async function getBoard(){
+   return get(ref(database, 'board'))
+   .then((snapshot)=>{
+     if(snapshot.exists()){
+        return Object.values(snapshot.val());
+      }
+      return []
+   })
+}

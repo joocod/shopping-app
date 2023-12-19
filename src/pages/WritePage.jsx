@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { addBoard } from '../api/firebase';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function WritePage() {
@@ -10,6 +10,7 @@ function WritePage() {
 
     const [boardTitle, setBoardTitle] = useState('');
     const [boardText, setBoardText] = useState('');
+    const navigate = useNavigate();
     
     const today = new Date();
     const date = `${today.getFullYear()}년 
@@ -17,8 +18,10 @@ function WritePage() {
                   ${today.getDate()}일`
 
     const onSubmit = async(e)=>{
+        e.preventDefault();
         try{
-            await addBoard(email, date, boardTitle, boardText)
+            await addBoard(email, date, boardTitle, boardText);
+            navigate('/board/qna')
         }catch(error){
             console.error(error);
         }
@@ -47,7 +50,7 @@ function WritePage() {
                     />
                 </div>
 
-                <button className='submit-btn'>작성하기</button>
+                <button type='submit' className='submit-btn'>작성하기</button>
             </form>
         </BoardContainer>
     )
