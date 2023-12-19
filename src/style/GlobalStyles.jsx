@@ -76,7 +76,7 @@ button{
 	gap: 20px 5%;
 	flex-wrap: wrap;
 	li{
-		flex-basis: 30%;
+		flex-basis: 15%;
 		flex-shrink: 0;
 	}
 }
