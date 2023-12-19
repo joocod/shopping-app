@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { onUserState } from '../api/firebase';
+import { getBoard, onUserState } from '../api/firebase';
+import { useQuery } from '@tanstack/react-query';
+import BoardListItem from '../components/BoardListItem';
 
 function Qna() {
 
@@ -16,12 +18,23 @@ function Qna() {
         navigate(`/board/write`,{state : {email : user.email}})
     }
 
+    const {data : board, isLoading, isError} = useQuery({
+        queryKey : 'board',
+        queryFn : getBoard
+    })
+
     return (
         <div className='container'>
             <div className='board-top'>
                 <h2>QnA 게시판</h2>
                 <button className='writeBtn' onClick={onWriteEvent}>작성하기</button>
             </div>
+
+            <ul className='boardList'>
+                {board.map((el)=>(
+                    <BoardListItem key={el.id} post={el}/>
+                ))}
+            </ul>
         </div>
     )
 }
