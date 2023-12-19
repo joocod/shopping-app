@@ -17,7 +17,7 @@ function CategoryPages() {
             console.error(error)
         })
     }, [category])
-    console.log(products)
+    // console.log(products)
     // const slideItem = products.map((product)=>product.image)
     // console.log(slideItem)
 
