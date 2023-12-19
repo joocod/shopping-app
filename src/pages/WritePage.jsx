@@ -6,8 +6,7 @@ import styled from 'styled-components';
 function WritePage() {
 
     const state = useLocation().state;
-    const {email} = state;
-    // console.log(email)
+    const email = state;
 
     const [boardTitle, setBoardTitle] = useState('');
     const [boardText, setBoardText] = useState('');
