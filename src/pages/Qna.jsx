@@ -34,7 +34,7 @@ function Qna() {
             </div>
 
             <ul className='boardList'>
-                {board.map((el)=>(
+                {board && board.map((el)=>(
                     <BoardListItem key={el.id} post={el}/>
                 ))}
             </ul>

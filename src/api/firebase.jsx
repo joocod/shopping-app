@@ -227,3 +227,24 @@ export async function getBoard(){
       return []
    })
 }
+
+// 게시글에 댓글 저장하기
+export async function addComments(boardId, user, text){
+   const id = uuid();
+   return set(ref(database, `/board/${boardId}/comments/${id}`),{
+      id,
+      user,
+      text
+   })
+}
+
+export async function getComments(boardId){
+   return get(ref(database, `/board/${boardId}/comments`))
+   .then((snapshot)=>{
+     if(snapshot.exists()){
+        return Object.values(snapshot.val())
+     }else{
+        return []
+     }
+   })
+}
