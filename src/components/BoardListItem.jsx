@@ -5,7 +5,15 @@ import styled from 'styled-components'
 function BoardListItem({post}) {
     const navigate = useNavigate();
     const onDetailEvent = ()=>{
-        navigate(`${post.id}`);
+        navigate(`${post.id}`,{
+            state : {
+                id : post.id,
+                user : post.user,
+                date : post.date,
+                title : post.title,
+                text : post.text
+            }
+        })
     }
 
     return (
