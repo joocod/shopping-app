@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import UseCart from '../context/UseCart';
+import ProductReview from '../components/ProductReview';
 
 function ProductDetail() {
     const {addItemCart} = UseCart();
@@ -58,6 +59,7 @@ function ProductDetail() {
                 </div>
                 {success && <p>{success}</p>}
             </DetailPage>
+            <ProductReview productId={id}/>
         </div>
     )
 }

@@ -238,6 +238,7 @@ export async function addComments(boardId, user, text){
    })
 }
 
+// 게시글 댓글 불러오기
 export async function getComments(boardId){
    return get(ref(database, `/board/${boardId}/comments`))
    .then((snapshot)=>{
@@ -247,4 +248,35 @@ export async function getComments(boardId){
         return []
      }
    })
+}
+
+// 리뷰 글 저장
+export async function addReview(productId, user, text){
+   const reviewId = uuid();
+   const reviewRef = ref(database, `review/${productId}/${reviewId}`);
+
+   try{
+      await set(reviewRef,{
+          id : reviewId,
+          user : user,
+          text : text,
+      })
+      return reviewId
+   }catch(error){
+      console.error(error)
+   }
+}
+
+export async function getReview(productId){
+    const reviewRef = ref(database, `review/${productId}`);
+    try{
+        const snapshot = await get(reviewRef);
+        if(snapshot.exists()){
+            return Object.values(snapshot.val());
+        }else{
+            return [];
+        }
+    }catch(error){
+        console.error(error)
+    }
 }
