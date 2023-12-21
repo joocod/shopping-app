@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import { formatCurrency } from '../api/firebase';
 
 function DetailPageEvent({product}) {
 
@@ -40,7 +41,7 @@ function DetailPageEvent({product}) {
             <div className='textWrap'>
                 <h3 className='itemTitle'>{product.title}</h3>
                 <div class="itemFlex">
-                    <p className='itemPrice'>{product.price}</p>
+                    <p className='itemPrice'>{formatCurrency(product.price)}</p>
                     <p classitemOpt>{product.option}</p>
                 </div>
                 <div className='itemColor'>

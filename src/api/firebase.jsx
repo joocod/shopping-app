@@ -96,12 +96,35 @@ async function adminUser(user){
   }
 }
 
+// 상품 가격 변환 함수
+export function formatCurrency(item){
+    const number = parseInt(item)
+
+    return number.toLocaleString('ko-KR');
+    // 지역에 맞는 단위를 자동으로 구분해서 ,를 찍어줌
+    /*
+        - ko-KR : 한국
+        - en-US : 미국
+        - en-CA : 캐나다
+        - ja-JP : 일본
+        - zh-CN : 중국
+    */
+}
+
 // 상품을 database에 업로드
 export async function addProducts(product, image){
     /*
       * uuid 
       - 식별자를 만들어주는 라이브러리
       - 숫자와 영문으로 조합된 식별자 코드를 부여해서 고유값으로 사용
+
+      - 데이터베이스에 데이터를 저장할 때는 원시 형태의 값으로 
+        유지시켜서 저장하고 출력할 때 변환해주는 과정을 넣어주는 
+        것이 가장 일반적이고 안전한 방법이다.
+      - 우선적으로 변환을 해서 저장하게 되면 지역이 바뀌는 경우
+        재변환이 필요한 경우가 생긴다.
+      - 이 때문에 원시 형태로 저장한 후 필요할 때마다 변환하는 것이
+        재사용성과 유연성의 측면에서 좋다.    
     */
    const id = uuid()
    return set(ref(database, `products/${id}`),{
@@ -280,3 +303,4 @@ export async function getReview(productId){
         console.error(error)
     }
 }
+

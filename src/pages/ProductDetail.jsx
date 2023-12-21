@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import UseCart from '../context/UseCart';
 import ProductReview from '../components/ProductReview';
+import { formatCurrency } from '../api/firebase';
 
 function ProductDetail() {
     const {addItemCart} = UseCart();
@@ -40,7 +41,7 @@ function ProductDetail() {
                 </div>
                 <div className='detailText'>
                     <h3>{title}</h3>
-                    <p className='price'>가격<span>{price}</span></p>
+                    <p className='price'>가격<span>{formatCurrency(price)}</span></p>
                     <p className='description'>{description}</p>
                     <div className='detailOpt'>
                         {/* 리액트에서는 label에 for 대신 htmlFor를 사용 */}
