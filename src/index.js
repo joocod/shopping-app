@@ -15,6 +15,8 @@ import Search from './pages/Search';
 import WritePage from './pages/WritePage';
 import Qna from './pages/Qna';
 import BoardDetailpage from './pages/BoardDetailpage';
+import Join from './pages/Join';
+import Login from './pages/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -45,6 +47,8 @@ const routes = createBrowserRouter([
       {path : '/board/write', element : <WritePage/>},
       {path : '/board/qna', element : <Qna/>},
       {path : '/board/qna/:id', element : <BoardDetailpage/>},
+      {path : '/join', element : <Join/>},
+      {path : '/login', element : <Login/>},
       {
         path : '/product/upload', 
         element : 
