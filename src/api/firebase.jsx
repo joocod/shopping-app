@@ -1,10 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { 
   GoogleAuthProvider, 
+  createUserWithEmailAndPassword, 
   getAuth, 
   onAuthStateChanged, 
+  signInWithEmailAndPassword, 
   signInWithPopup, 
-  signOut
+  signOut,
+  updateProfile
 } from "firebase/auth";
 
 import {set, get, getDatabase, ref, remove} from 'firebase/database';
@@ -304,3 +307,37 @@ export async function getReview(productId){
     }
 }
 
+// 이메일 회원가입 저장
+export async function joinEmail(email, password, name){
+    const auth = getAuth()  // 저장할 사용자 인증 폼을 불러옴
+    try{
+        const userData = await createUserWithEmailAndPassword(auth, email, password)
+        
+        /*
+            * createUserWithEmailAndPassword
+            - 사용자 정보 이메일 패스워드만 저장할 수 있으며,
+              추가로 정보를 저장할 때는 우회하는 방법을 이용해야 한다.
+            - 회원가입과 동시에 로그인이 되는 기능을 가지고 있다.
+        */
+
+       const user = userData.user
+
+       await updateProfile (user,{
+          displayName : name
+       })
+       await signOut(auth);
+       return {success : true};
+    }catch(error){
+        return {error : error.code} // 에러 코드 반환 
+    }
+}
+
+// 로그인
+export async function loginEmail(email, password){
+    try{
+        const userData = await signInWithEmailAndPassword(auth, email, password);
+        return userData.user
+    }catch(error){
+        console.error(error)
+    }
+}

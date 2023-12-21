@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-import { googleLogOut, googleLogin, onUserState } from '../api/firebase';
+import {Link, useNavigate} from 'react-router-dom';
+import { googleLogOut, onUserState } from '../api/firebase';
 import UserData from './UserData';
-// import { FaPen } from "react-icons/fa";
 import MainMenu from './MainMenu';
 
 function Nav() {
 
     const [user, setUser] = useState();
+    const navigate = useNavigate();
 
     const login =()=>{
-        googleLogin().then(setUser);
+        navigate('/login'); // 로그인 페이지로 이동하는 메소드로 변경 
     }
    
     const logout=()=>{
