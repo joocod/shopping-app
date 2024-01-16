@@ -18,7 +18,7 @@ function Qna() {
         navigate(`/board/write`,{state : {email : user.email}})
     }
 
-    const {data : board, isLoading, isError} = useQuery({
+    const {data : board} = useQuery({
         queryKey : 'board',
         queryFn : getBoard
     })
